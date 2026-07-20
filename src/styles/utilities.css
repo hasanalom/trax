@@ -1,0 +1,72 @@
+/* ============================================================================
+   TRAX · Custom Utilities
+   Small, composable helpers that encode house patterns. Registered with
+   @utility so they support Tailwind variants (hover:, dark:, md:, …).
+   ============================================================================ */
+
+/* Accessible visually-hidden content (skip links, sr-only labels). */
+@utility sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Canonical focus ring — offset ring in the accent color. */
+@utility focus-ring {
+  outline: none;
+  &:focus-visible {
+    outline: 2px solid var(--ring-color);
+    outline-offset: 2px;
+  }
+}
+
+/* Inset focus ring for dense controls where an offset ring would clip. */
+@utility focus-ring-inset {
+  outline: none;
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--ring-color);
+  }
+}
+
+/* Tabular numerics for data-dense readouts. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Hairline top-inset highlight — lifts raised surfaces in dark mode. */
+@utility surface-edge {
+  box-shadow: inset 0 1px 0 0 color-mix(in srgb, var(--gray-0) 6%, transparent);
+}
+
+/* Centered, gutter-aware content column. */
+@utility container-content {
+  width: 100%;
+  max-width: var(--spacing-content);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* Reading-width column for prose and forms. */
+@utility container-measure {
+  width: 100%;
+  max-width: var(--spacing-measure);
+  margin-inline: auto;
+}
+
+/* Standardized transition presets. */
+@utility transition-standard {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-duration: var(--duration-fast);
+  transition-timing-function: var(--ease-standard);
+}
+@utility transition-entrance {
+  transition-timing-function: var(--ease-entrance);
+  transition-duration: var(--duration-normal);
+}

@@ -1,0 +1,245 @@
+/* ============================================================================
+   TRAX · Design Tokens
+   ----------------------------------------------------------------------------
+   Three tiers:
+     1. Primitives   — raw, theme-agnostic values (never used directly in UI)
+     2. Semantic     — meaning-driven aliases that flip per theme
+     3. @theme       — Tailwind mapping so utilities read the semantic layer
+   Rule: components consume the semantic layer only.
+   ============================================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Primitive · Neutral (cool slate — instrument-panel precision) ------- */
+  --gray-0:   #ffffff;
+  --gray-50:  #f7f8f9;
+  --gray-100: #eef0f2;
+  --gray-150: #e5e8ec;
+  --gray-200: #dbdfe4;
+  --gray-300: #c0c5cd;
+  --gray-400: #99a0ab;
+  --gray-500: #6b7280;
+  --gray-600: #4c535d;
+  --gray-700: #383d45;
+  --gray-800: #23272e;
+  --gray-850: #191c22;
+  --gray-900: #12151a;
+  --gray-950: #0b0d10;
+
+  /* ---- Primitive · Accent (aviation cobalt — used sparingly) --------------- */
+  --accent-50:  #eef4ff;
+  --accent-100: #dbe6fd;
+  --accent-200: #bcd0fa;
+  --accent-300: #8fb0f2;
+  --accent-400: #5b87e6;
+  --accent-500: #3b6fd4;
+  --accent-600: #2f59b3;
+  --accent-700: #284a91;
+  --accent-800: #233d72;
+  --accent-900: #1e3257;
+
+  /* ---- Primitive · Status (muted, never neon) ----------------------------- */
+  --green-50:  #e9f7f0;  --green-500:  #1f9d63;  --green-600:  #178253;  --green-300: #6fd3a3;
+  --amber-50:  #fdf3e2;  --amber-500:  #c07812;  --amber-600:  #a1640c;  --amber-300: #e9b45a;
+  --red-50:    #fdecec;  --red-500:    #d1453b;  --red-600:    #b5352c;  --red-300:   #f0938b;
+
+  /* ---- Semantic · Surfaces ------------------------------------------------- */
+  --surface-base:    var(--gray-50);   /* app canvas          */
+  --surface-raised:  var(--gray-0);    /* cards, panels       */
+  --surface-sunken:  var(--gray-100);  /* insets, wells       */
+  --surface-overlay: var(--gray-0);    /* menus, popovers     */
+  --surface-hover:   var(--gray-100);
+  --surface-active:  var(--gray-150);
+  --surface-inverse: var(--gray-900);
+
+  /* ---- Semantic · Text ----------------------------------------------------- */
+  --text-primary:    var(--gray-900);
+  --text-secondary:  var(--gray-600);
+  --text-tertiary:   var(--gray-500);
+  --text-disabled:   var(--gray-400);
+  --text-inverse:    var(--gray-0);
+  --text-accent:     var(--accent-600);
+  --text-on-accent:  var(--gray-0);
+
+  /* ---- Semantic · Borders -------------------------------------------------- */
+  --border-subtle:   var(--gray-150);
+  --border-default:  var(--gray-200);
+  --border-strong:   var(--gray-300);
+  --border-focus:    var(--accent-500);
+
+  /* ---- Semantic · Accent --------------------------------------------------- */
+  --accent-surface:  var(--accent-50);
+  --accent-border:   var(--accent-200);
+  --accent-solid:    var(--accent-500);
+  --accent-solid-hover: var(--accent-600);
+
+  /* ---- Semantic · Status --------------------------------------------------- */
+  --success-surface: var(--green-50);  --success-text: var(--green-600);  --success-solid: var(--green-500);
+  --warning-surface: var(--amber-50);  --warning-text: var(--amber-600);  --warning-solid: var(--amber-500);
+  --danger-surface:  var(--red-50);    --danger-text:  var(--red-600);    --danger-solid:  var(--red-500);
+  --info-surface:    var(--accent-50); --info-text:    var(--accent-600); --info-solid:    var(--accent-500);
+
+  /* ---- Semantic · Elevation (light: soft, layered) ------------------------- */
+  --shadow-xs: 0 1px 1px rgba(16, 21, 26, 0.04);
+  --shadow-sm: 0 1px 2px rgba(16, 21, 26, 0.06), 0 1px 1px rgba(16, 21, 26, 0.04);
+  --shadow-md: 0 2px 4px -1px rgba(16, 21, 26, 0.06), 0 4px 10px -2px rgba(16, 21, 26, 0.08);
+  --shadow-lg: 0 4px 8px -2px rgba(16, 21, 26, 0.06), 0 14px 28px -6px rgba(16, 21, 26, 0.12);
+  --shadow-xl: 0 8px 16px -4px rgba(16, 21, 26, 0.08), 0 28px 56px -12px rgba(16, 21, 26, 0.16);
+
+  /* ---- Ring (focus) -------------------------------------------------------- */
+  --ring-color: var(--accent-500);
+}
+
+/* ============================================================================
+   Dark theme — flips the semantic layer only.
+   Applied via [data-theme="dark"] (set by ThemeProvider before paint).
+   ============================================================================ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --surface-base:    var(--gray-950);
+  --surface-raised:  var(--gray-900);
+  --surface-sunken:  #08090b;
+  --surface-overlay: var(--gray-850);
+  --surface-hover:   var(--gray-850);
+  --surface-active:  var(--gray-800);
+  --surface-inverse: var(--gray-50);
+
+  --text-primary:    var(--gray-50);
+  --text-secondary:  var(--gray-400);
+  --text-tertiary:   var(--gray-500);
+  --text-disabled:   var(--gray-600);
+  --text-inverse:    var(--gray-950);
+  --text-accent:     var(--accent-300);
+  --text-on-accent:  var(--gray-0);
+
+  --border-subtle:   var(--gray-850);
+  --border-default:  var(--gray-800);
+  --border-strong:   var(--gray-700);
+  --border-focus:    var(--accent-400);
+
+  --accent-surface:  color-mix(in srgb, var(--accent-500) 16%, transparent);
+  --accent-border:   color-mix(in srgb, var(--accent-400) 32%, transparent);
+  --accent-solid:    var(--accent-500);
+  --accent-solid-hover: var(--accent-400);
+
+  --success-surface: color-mix(in srgb, var(--green-500) 15%, transparent);  --success-text: var(--green-300);
+  --warning-surface: color-mix(in srgb, var(--amber-500) 15%, transparent);  --warning-text: var(--amber-300);
+  --danger-surface:  color-mix(in srgb, var(--red-500)   15%, transparent);  --danger-text:  var(--red-300);
+  --info-surface:    color-mix(in srgb, var(--accent-500) 15%, transparent); --info-text:    var(--accent-300);
+
+  /* Dark elevation leans on depth + a hairline, not soft blur. */
+  --shadow-xs: 0 1px 1px rgba(0, 0, 0, 0.40);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.50), 0 1px 1px rgba(0, 0, 0, 0.40);
+  --shadow-md: 0 2px 4px -1px rgba(0, 0, 0, 0.50), 0 6px 14px -3px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 6px 14px -4px rgba(0, 0, 0, 0.55), 0 18px 40px -8px rgba(0, 0, 0, 0.65);
+  --shadow-xl: 0 10px 24px -6px rgba(0, 0, 0, 0.60), 0 32px 64px -16px rgba(0, 0, 0, 0.72);
+
+  --ring-color: var(--accent-400);
+}
+
+/* ============================================================================
+   Tailwind mapping. `inline` keeps the var reference in output so the
+   semantic layer resolves at runtime (theme switching works with no rebuild).
+   ============================================================================ */
+@theme inline {
+  /* ---- Fonts ---- */
+  --font-sans: var(--font-sans-src), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-mono-src), ui-monospace, "SF Mono", "Cascadia Code",
+    "Roboto Mono", Menlo, Consolas, monospace;
+
+  /* ---- Type scale (size · line-height · tracking · weight) ---- */
+  --text-caption:  0.6875rem;  --text-caption--line-height:  1rem;      --text-caption--letter-spacing: 0.02em;   --text-caption--font-weight: 500;
+  --text-footnote: 0.75rem;    --text-footnote--line-height: 1.125rem;  --text-footnote--letter-spacing: 0.005em; --text-footnote--font-weight: 400;
+  --text-label:    0.8125rem;  --text-label--line-height:    1.25rem;   --text-label--letter-spacing: 0;          --text-label--font-weight: 500;
+  --text-body:     0.875rem;   --text-body--line-height:     1.375rem;  --text-body--letter-spacing: 0;           --text-body--font-weight: 400;
+  --text-body-lg:  1rem;       --text-body-lg--line-height:  1.5rem;    --text-body-lg--letter-spacing: 0;        --text-body-lg--font-weight: 400;
+  --text-subtitle: 1.0625rem;  --text-subtitle--line-height: 1.5rem;    --text-subtitle--letter-spacing: -0.01em; --text-subtitle--font-weight: 500;
+  --text-title:    1.375rem;   --text-title--line-height:    1.75rem;   --text-title--letter-spacing: -0.014em;   --text-title--font-weight: 600;
+  --text-heading:  1.75rem;    --text-heading--line-height:  2.125rem;  --text-heading--letter-spacing: -0.018em; --text-heading--font-weight: 600;
+  --text-display:  2.25rem;    --text-display--line-height:  2.5rem;    --text-display--letter-spacing: -0.022em; --text-display--font-weight: 600;
+
+  /* ---- Colors → utilities (bg-*, text-*, border-*) ---- */
+  --color-surface-base:    var(--surface-base);
+  --color-surface-raised:  var(--surface-raised);
+  --color-surface-sunken:  var(--surface-sunken);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-surface-hover:   var(--surface-hover);
+  --color-surface-active:  var(--surface-active);
+  --color-surface-inverse: var(--surface-inverse);
+
+  --color-primary:    var(--text-primary);
+  --color-secondary:  var(--text-secondary);
+  --color-tertiary:   var(--text-tertiary);
+  --color-disabled:   var(--text-disabled);
+  --color-inverse:    var(--text-inverse);
+  --color-on-accent:  var(--text-on-accent);
+
+  --color-border-subtle:  var(--border-subtle);
+  --color-border-default: var(--border-default);
+  --color-border-strong:  var(--border-strong);
+  --color-border-focus:   var(--border-focus);
+
+  --color-accent:         var(--accent-solid);
+  --color-accent-hover:   var(--accent-solid-hover);
+  --color-accent-surface: var(--accent-surface);
+  --color-accent-border:  var(--accent-border);
+  --color-accent-text:    var(--text-accent);
+
+  --color-success-surface: var(--success-surface); --color-success-text: var(--success-text); --color-success-solid: var(--success-solid);
+  --color-warning-surface: var(--warning-surface); --color-warning-text: var(--warning-text); --color-warning-solid: var(--warning-solid);
+  --color-danger-surface:  var(--danger-surface);  --color-danger-text:  var(--danger-text);  --color-danger-solid:  var(--danger-solid);
+  --color-info-surface:    var(--info-surface);    --color-info-text:    var(--info-text);    --color-info-solid:    var(--info-solid);
+
+  /* ---- Radius scale ---- */
+  --radius-xs:  0.25rem;   /*  4px */
+  --radius-sm:  0.375rem;  /*  6px */
+  --radius-md:  0.5rem;    /*  8px */
+  --radius-lg:  0.625rem;  /* 10px */
+  --radius-xl:  0.875rem;  /* 14px */
+  --radius-2xl: 1.25rem;   /* 20px */
+
+  /* ---- Elevation ---- */
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+
+  /* ---- Motion (Fluent/Apple-style: enter decelerates, exit accelerates) ---- */
+  --ease-standard:  cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1);
+  --ease-entrance:  cubic-bezier(0, 0, 0, 1);
+  --ease-exit:      cubic-bezier(0.3, 0, 1, 1);
+}
+
+/* ----------------------------------------------------------------------------
+   Layout, motion & z-index — plain :root vars (not Tailwind theme keys).
+   Consumed via the `utility-(--var)` shorthand or raw var() in CSS, so they
+   deliberately stay out of the utility-generating namespaces.
+   ---------------------------------------------------------------------------- */
+:root {
+  /* Fixed chrome dimensions + reading measures */
+  --spacing-sidebar:           16rem;    /* 256px */
+  --spacing-sidebar-collapsed: 4rem;     /*  64px */
+  --spacing-topbar:            3.5rem;    /*  56px */
+  --spacing-gutter:            1.5rem;    /*  24px */
+  --spacing-content:           80rem;     /* 1280px max content */
+  --spacing-measure:           40rem;     /* optimal prose width */
+
+  --duration-instant: 80ms;
+  --duration-fast:    140ms;
+  --duration-normal:  200ms;
+  --duration-slow:    280ms;
+
+  --z-base:     0;
+  --z-sticky:   100;
+  --z-sidebar:  200;
+  --z-topbar:   300;
+  --z-dropdown: 400;
+  --z-overlay:  500;
+  --z-modal:    600;
+  --z-toast:    700;
+}
