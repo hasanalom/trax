@@ -3,40 +3,38 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
-import { PlaneIcon } from "@/components/icons";
+import { MoreHorizontalIcon, PlaneIcon } from "@/components/icons";
 import { navSections } from "@/components/layout/nav-config";
 
 /**
  * Sidebar — the primary navigation rail.
  *
- * Presentational and route-aware: highlights the active destination from the
- * pathname. Rendered fixed on desktop and inside an off-canvas drawer on
- * mobile (both handled by AppShell). Width is driven by the --spacing-sidebar
- * token so chrome dimensions stay consistent.
+ * Route-aware: the active destination shows a neutral fill plus a thin accent
+ * indicator bar (keeping the blue budget minimal). The brand is a two-line
+ * product lockup and the footer is a Fluent/M365-style account button.
  */
 export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
     <div className="flex h-full w-(--spacing-sidebar) flex-col bg-surface-raised">
-      {/* Brand */}
+      {/* Brand lockup */}
       <div className="flex h-(--spacing-topbar) items-center gap-2.5 px-4">
-        <span className="grid h-7 w-7 place-items-center rounded-md bg-accent text-on-accent">
+        <span className="grid h-8 w-8 place-items-center rounded-lg bg-surface-inverse text-inverse shadow-xs">
           <PlaneIcon size={18} />
         </span>
-        <span className="text-label font-semibold tracking-tight text-primary">
-          TRAX
-        </span>
-        <span className="ml-auto rounded-xs bg-surface-sunken px-1.5 py-0.5 text-caption text-tertiary">
-          TECH RECORDS
+        <span className="flex min-w-0 flex-col justify-center leading-none">
+          <span className="text-label font-semibold tracking-tight text-primary">
+            TRAX
+          </span>
+          <span className="mt-1 text-[0.625rem] font-medium uppercase leading-none tracking-[0.16em] text-tertiary">
+            Technical Records
+          </span>
         </span>
       </div>
 
       {/* Navigation */}
-      <nav
-        aria-label="Primary"
-        className="flex-1 overflow-y-auto px-3 pb-4 pt-2"
-      >
+      <nav aria-label="Primary" className="flex-1 overflow-y-auto px-3 pb-4 pt-2">
         {navSections.map((section, i) => (
           <div key={section.title ?? `group-${i}`} className={cn(i > 0 && "mt-6")}>
             {section.title && (
@@ -58,16 +56,21 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
                       onClick={onNavigate}
                       aria-current={active ? "page" : undefined}
                       className={cn(
-                        "group flex items-center gap-2.5 rounded-md px-2 py-1.5 text-label transition-standard focus-ring",
+                        "group relative flex items-center gap-2.5 rounded-md py-1.5 pl-3 pr-2 text-label transition-standard focus-ring",
                         active
-                          ? "bg-accent-surface font-medium text-accent-text"
+                          ? "bg-surface-active font-medium text-primary"
                           : "text-secondary hover:bg-surface-hover hover:text-primary",
                       )}
                     >
+                      {active && (
+                        <span className="absolute left-0 top-1/2 h-4 w-[3px] -translate-y-1/2 rounded-full bg-accent" />
+                      )}
                       <Icon
                         size={18}
                         className={cn(
-                          active ? "text-accent-text" : "text-tertiary group-hover:text-secondary",
+                          active
+                            ? "text-primary"
+                            : "text-tertiary group-hover:text-secondary",
                         )}
                       />
                       {item.label}
@@ -80,23 +83,31 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
         ))}
       </nav>
 
-      {/* Account footer */}
-      <div className="border-t border-border-subtle p-3">
+      {/* Account — Fluent / M365 style */}
+      <div className="border-t border-border-subtle p-2.5">
         <button
           type="button"
-          className="flex w-full items-center gap-2.5 rounded-md p-1.5 text-left transition-standard focus-ring hover:bg-surface-hover"
+          className="flex w-full items-center gap-2.5 rounded-lg p-1.5 text-left transition-standard focus-ring hover:bg-surface-hover"
+          aria-label="Account: Hasan Alom, Technical Records"
         >
-          <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-surface-sunken text-caption font-semibold text-secondary">
-            HA
+          <span className="relative shrink-0">
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-surface-sunken text-caption font-semibold text-secondary">
+              HA
+            </span>
+            <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[var(--presence-online)] ring-2 ring-surface-raised" />
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-label font-medium text-primary">
-              H. Alom
+            <span className="block truncate text-label font-semibold text-primary">
+              Hasan Alom
             </span>
-            <span className="block truncate text-footnote text-tertiary">
-              Records Engineering
+            <span className="block truncate text-caption text-tertiary">
+              Technical Records
             </span>
           </span>
+          <MoreHorizontalIcon
+            size={16}
+            className="shrink-0 text-tertiary transition-standard group-hover:text-secondary"
+          />
         </button>
       </div>
     </div>

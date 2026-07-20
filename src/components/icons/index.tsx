@@ -142,3 +142,95 @@ export const PlusIcon = (p: IconProps) => (
     <path d="M12 5v14M5 12h14" />
   </IconBase>
 );
+
+export const ClockIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="M12 7.5V12l3 1.8" />
+  </IconBase>
+);
+
+export const AlertTriangleIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M12 4.5 21 19H3l9-14.5Z" />
+    <path d="M12 10v4M12 16.6v.01" />
+  </IconBase>
+);
+
+export const CheckIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="m5 12.5 4.5 4.5L19 7" />
+  </IconBase>
+);
+
+export const CheckCircleIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <circle cx="12" cy="12" r="8.5" />
+    <path d="m8.5 12 2.5 2.5 4.5-5" />
+  </IconBase>
+);
+
+export const ArrowUpRightIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M7 17 17 7M8.5 7H17v8.5" />
+  </IconBase>
+);
+
+export const ArrowDownRightIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M7 7l10 10M17 8.5V17H8.5" />
+  </IconBase>
+);
+
+export const ArrowRightIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M4.5 12h15M13 5.5l6.5 6.5-6.5 6.5" />
+  </IconBase>
+);
+
+export const UploadIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M12 15.5V4.5M8 8l4-4 4 4" />
+    <path d="M5 15v3.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V15" />
+  </IconBase>
+);
+
+export const FileCheckIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M6.5 3.5h7L19 9v11.5a1 1 0 0 1-1 1H6.5a1 1 0 0 1-1-1v-16a1 1 0 0 1 1-1Z" />
+    <path d="M13.5 3.5V9H19" />
+    <path d="m9 14.5 2 2 3.5-3.5" />
+  </IconBase>
+);
+
+export const ChartBarIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M4 20h16" />
+    <rect x="6" y="11" width="3" height="6" rx="0.8" />
+    <rect x="11" y="7" width="3" height="10" rx="0.8" />
+    <rect x="16" y="13" width="3" height="4" rx="0.8" />
+  </IconBase>
+);
+
+export const MoreHorizontalIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <circle cx="5.5" cy="12" r="1.3" fill="currentColor" stroke="none" />
+    <circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none" />
+    <circle cx="18.5" cy="12" r="1.3" fill="currentColor" stroke="none" />
+  </IconBase>
+);
+
+export const ExternalLinkIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M14 5.5h4.5V10" />
+    <path d="M18 6 11 13" />
+    <path d="M17 14v4a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h4" />
+  </IconBase>
+);
+
+export const InboxIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M3.5 13.5 6 5.5a1 1 0 0 1 1-.8h10a1 1 0 0 1 1 .8l2.5 8" />
+    <path d="M3.5 13.5H8l1.2 2.2h5.6L16 13.5h4.5v4a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-4Z" />
+  </IconBase>
+);
