@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -63,12 +64,15 @@ export function RecentDocuments() {
                 {recentDocuments.map((doc) => (
                   <tr
                     key={doc.id}
-                    className="border-b border-border-subtle transition-standard last:border-0 hover:bg-surface-hover"
+                    className="relative border-b border-border-subtle transition-standard last:border-0 hover:bg-surface-hover"
                   >
                     <td className="px-5 py-3">
-                      <div className="text-label font-medium text-primary">
+                      <Link
+                        href={`/records/${doc.id}`}
+                        className="text-label font-medium text-primary transition-standard focus-ring after:absolute after:inset-0 after:content-['']"
+                      >
                         {doc.title}
-                      </div>
+                      </Link>
                       <div className="mt-0.5 text-footnote text-tertiary">
                         {doc.reference}
                       </div>

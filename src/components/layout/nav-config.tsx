@@ -10,7 +10,6 @@ import {
   CalendarIcon,
   ClipboardIcon,
   DocumentIcon,
-  GaugeIcon,
   GridIcon,
   LayersIcon,
   type IconProps,
@@ -34,10 +33,7 @@ export const navSections: NavSection[] = [
   },
   {
     title: "Fleet",
-    items: [
-      { label: "Aircraft", href: "/aircraft", icon: LayersIcon },
-      { label: "Status Board", href: "/status", icon: GaugeIcon },
-    ],
+    items: [{ label: "Aircraft", href: "/aircraft", icon: LayersIcon }],
   },
   {
     title: "Records",

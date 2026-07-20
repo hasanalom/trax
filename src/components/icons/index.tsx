@@ -234,3 +234,55 @@ export const InboxIcon = (p: IconProps) => (
     <path d="M3.5 13.5H8l1.2 2.2h5.6L16 13.5h4.5v4a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1v-4Z" />
   </IconBase>
 );
+
+export const ChevronRightIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="m9.5 6 6 6-6 6" />
+  </IconBase>
+);
+
+export const DownloadIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M12 4v11M8 11l4 4 4-4" />
+    <path d="M5 19h14" />
+  </IconBase>
+);
+
+export const PaperclipIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M18.5 10.5 11 18a4 4 0 0 1-5.7-5.6l7.7-7.7a2.6 2.6 0 0 1 3.7 3.7l-7.7 7.7a1.2 1.2 0 0 1-1.8-1.7l6.9-6.9" />
+  </IconBase>
+);
+
+export const FilterIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M4 5.5h16l-6.2 7.4v5.3l-3.6 1.8v-7.1L4 5.5Z" />
+  </IconBase>
+);
+
+export const MapPinIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M12 21s6.5-5.2 6.5-10.5a6.5 6.5 0 0 0-13 0C5.5 15.8 12 21 12 21Z" />
+    <circle cx="12" cy="10.5" r="2.4" />
+  </IconBase>
+);
+
+export const WrenchIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M15.5 6.5a4 4 0 0 0-5.1 5.1L4.5 17.5a2 2 0 0 0 2.8 2.8l5.9-5.9a4 4 0 0 0 5.1-5.1l-2.6 2.6-2.4-.6-.6-2.4 2.6-2.6Z" />
+  </IconBase>
+);
+
+export const ShieldCheckIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M12 3.5 5.5 6v5.5c0 4 2.8 7 6.5 8.5 3.7-1.5 6.5-4.5 6.5-8.5V6L12 3.5Z" />
+    <path d="m9 11.5 2 2 4-4.5" />
+  </IconBase>
+);
+
+export const UserIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <circle cx="12" cy="8.5" r="3.5" />
+    <path d="M5.5 19.5a6.5 6.5 0 0 1 13 0" />
+  </IconBase>
+);
