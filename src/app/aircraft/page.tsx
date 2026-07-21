@@ -9,14 +9,16 @@ import {
   LayersIcon,
   WrenchIcon,
 } from "@/components/icons";
-import { fleetStats } from "@/lib/fleet";
+import { getAircraft, getFleetStats } from "@/lib/data/fleet";
 
 export const metadata: Metadata = { title: "Aircraft Fleet" };
 
 /**
  * Aircraft Fleet — the fleet register: summary counts + a searchable table.
  */
-export default function AircraftPage() {
+export default async function AircraftPage() {
+  const [aircraft, fleetStats] = await Promise.all([getAircraft(), getFleetStats()]);
+
   return (
     <div className="container-content py-6 sm:py-8">
       <PageHeader
@@ -53,7 +55,7 @@ export default function AircraftPage() {
       </section>
 
       <section className="mt-6">
-        <FleetTable />
+        <FleetTable aircraft={aircraft} stats={fleetStats} />
       </section>
     </div>
   );

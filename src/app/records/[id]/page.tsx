@@ -14,16 +14,15 @@ import {
   PaperclipIcon,
 } from "@/components/icons";
 import { formatDate } from "@/lib/format";
+import { docStatusTone, signoffTone } from "@/lib/records";
 import {
-  records,
-  getRecord,
-  docStatusTone,
-  signoffTone,
-} from "@/lib/records";
-import { getAircraft } from "@/lib/fleet";
+  getTechnicalRecord,
+  getTechnicalRecordIds,
+} from "@/lib/data/records";
+import { getAircraftById } from "@/lib/data/fleet";
 
-export function generateStaticParams() {
-  return records.map((r) => ({ id: r.id }));
+export async function generateStaticParams() {
+  return (await getTechnicalRecordIds()).map((id) => ({ id }));
 }
 
 export async function generateMetadata({
@@ -32,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const r = getRecord(id);
+  const r = await getTechnicalRecord(id);
   return { title: r ? r.title : "Record" };
 }
 
@@ -42,10 +41,10 @@ export default async function RecordDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const r = getRecord(id);
+  const r = await getTechnicalRecord(id);
   if (!r) notFound();
 
-  const ac = r.aircraftId ? getAircraft(r.aircraftId) : undefined;
+  const ac = r.aircraftId ? await getAircraftById(r.aircraftId) : undefined;
 
   return (
     <div className="container-content py-6 sm:py-8">

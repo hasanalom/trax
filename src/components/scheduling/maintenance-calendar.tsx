@@ -1,7 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import {
   CALENDAR_MONTH,
-  events,
   typeColorVar,
   MAINTENANCE_LEGEND,
   type MaintenanceEvent,
@@ -22,7 +21,7 @@ function chunk<T>(arr: T[], size: number): T[][] {
   return out;
 }
 
-export function MaintenanceCalendar() {
+export function MaintenanceCalendar({ events }: { events: MaintenanceEvent[] }) {
   const { year, month } = CALENDAR_MONTH;
   const firstWeekday = new Date(Date.UTC(year, month, 1)).getUTCDay();
   const daysInMonth = new Date(Date.UTC(year, month + 1, 0)).getUTCDate();

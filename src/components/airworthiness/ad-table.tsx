@@ -10,7 +10,11 @@ import { Table, Thead, Th, Tr, Td, RowLink } from "@/components/ui/table";
 import { ShieldCheckIcon } from "@/components/icons";
 import { formatDate, dueLabel, daysUntil } from "@/lib/format";
 import { priorityTone } from "@/lib/badges";
-import { directives, adStatusTone, type ADStatus } from "@/lib/airworthiness";
+import {
+  adStatusTone,
+  type ADStatus,
+  type AirworthinessDirective,
+} from "@/lib/airworthiness";
 
 /**
  * ADTable — Airworthiness Directives with search + priority filter. Rows with a
@@ -27,7 +31,7 @@ const PRIORITY_FILTERS = [
 
 const openStates: ADStatus[] = ["Open", "In Progress"];
 
-export function ADTable() {
+export function ADTable({ directives }: { directives: AirworthinessDirective[] }) {
   const [query, setQuery] = useState("");
   const [priority, setPriority] = useState("all");
 
@@ -41,7 +45,7 @@ export function ADTable() {
         .toLowerCase()
         .includes(q);
     });
-  }, [query, priority]);
+  }, [directives, query, priority]);
 
   return (
     <div className="flex flex-col gap-4">

@@ -6,7 +6,8 @@ import { FindingsTable } from "@/components/compliance/findings-table";
 import { ReviewQueue } from "@/components/compliance/review-queue";
 import { ComplianceHistory } from "@/components/compliance/compliance-history";
 import { AlertTriangleIcon, CheckCircleIcon, ClipboardIcon, ShieldCheckIcon } from "@/components/icons";
-import { findings, reviewQueue, complianceStats } from "@/lib/compliance";
+import { reviewQueue } from "@/lib/compliance";
+import { getFindings, getComplianceStats } from "@/lib/data/compliance";
 
 export const metadata: Metadata = { title: "Compliance" };
 
@@ -14,7 +15,11 @@ export const metadata: Metadata = { title: "Compliance" };
  * Compliance — findings management across open, closed, review-queue and audit
  * history tabs, with summary counts above.
  */
-export default function CompliancePage() {
+export default async function CompliancePage() {
+  const [findings, complianceStats] = await Promise.all([
+    getFindings(),
+    getComplianceStats(),
+  ]);
   const open = findings.filter((f) => f.status === "Open");
   const closed = findings.filter((f) => f.status === "Closed");
 

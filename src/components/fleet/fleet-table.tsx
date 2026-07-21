@@ -9,28 +9,38 @@ import { FilterChips } from "@/components/ui/filter-chips";
 import { Table, Thead, Th, Tr, Td, RowLink } from "@/components/ui/table";
 import { LayersIcon } from "@/components/icons";
 import { formatNumber } from "@/lib/format";
-import {
-  aircraft,
-  fleetStats,
-  fleetStatusTone,
-  type FleetStatus,
-} from "@/lib/fleet";
+import { fleetStatusTone, type Aircraft, type FleetStatus } from "@/lib/fleet";
+
+interface FleetStats {
+  total: number;
+  inService: number;
+  inMaintenance: number;
+  aog: number;
+  stored: number;
+}
 
 /**
  * FleetTable — searchable, status-filterable fleet register. Filtering is fully
- * client-side over the static fleet array. Rows deep-link to aircraft detail.
+ * client-side over the fleet data passed in from the server page. Rows deep-link
+ * to aircraft detail.
  */
-const STATUS_FILTERS: { id: string; label: string; count?: number }[] = [
-  { id: "all", label: "All", count: fleetStats.total },
-  { id: "In Service", label: "In Service", count: fleetStats.inService },
-  { id: "In Maintenance", label: "In Maintenance", count: fleetStats.inMaintenance },
-  { id: "AOG", label: "AOG", count: fleetStats.aog },
-  { id: "Stored", label: "Stored", count: fleetStats.stored },
-];
-
-export function FleetTable() {
+export function FleetTable({
+  aircraft,
+  stats,
+}: {
+  aircraft: Aircraft[];
+  stats: FleetStats;
+}) {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("all");
+
+  const STATUS_FILTERS: { id: string; label: string; count?: number }[] = [
+    { id: "all", label: "All", count: stats.total },
+    { id: "In Service", label: "In Service", count: stats.inService },
+    { id: "In Maintenance", label: "In Maintenance", count: stats.inMaintenance },
+    { id: "AOG", label: "AOG", count: stats.aog },
+    { id: "Stored", label: "Stored", count: stats.stored },
+  ];
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -42,7 +52,7 @@ export function FleetTable() {
         .toLowerCase()
         .includes(q);
     });
-  }, [query, status]);
+  }, [aircraft, query, status]);
 
   return (
     <div className="flex flex-col gap-4">

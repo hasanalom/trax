@@ -9,7 +9,11 @@ import { FilterChips } from "@/components/ui/filter-chips";
 import { Table, Thead, Th, Tr, Td, RowLink } from "@/components/ui/table";
 import { DocumentIcon } from "@/components/icons";
 import { formatDate } from "@/lib/format";
-import { bulletins, sbStatusTone, sbCategoryTone } from "@/lib/airworthiness";
+import {
+  sbStatusTone,
+  sbCategoryTone,
+  type ServiceBulletin,
+} from "@/lib/airworthiness";
 
 /**
  * SBTable — Service Bulletins with search + category filter. Mirrors the AD
@@ -22,7 +26,7 @@ const CATEGORY_FILTERS = [
   { id: "Optional", label: "Optional" },
 ];
 
-export function SBTable() {
+export function SBTable({ bulletins }: { bulletins: ServiceBulletin[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("all");
 
@@ -36,7 +40,7 @@ export function SBTable() {
         .toLowerCase()
         .includes(q);
     });
-  }, [query, category]);
+  }, [bulletins, query, category]);
 
   return (
     <div className="flex flex-col gap-4">

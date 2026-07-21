@@ -5,7 +5,11 @@ import { Button } from "@/components/ui/button";
 import { MaintenanceCalendar } from "@/components/scheduling/maintenance-calendar";
 import { UpcomingTimeline } from "@/components/scheduling/upcoming-timeline";
 import { CalendarIcon, GaugeIcon, PlusIcon, WrenchIcon } from "@/components/icons";
-import { schedulingStats } from "@/lib/scheduling";
+import {
+  getMaintenanceEvents,
+  getUpcomingMaintenance,
+  getSchedulingStats,
+} from "@/lib/data/scheduling";
 
 export const metadata: Metadata = { title: "Scheduling" };
 
@@ -13,7 +17,13 @@ export const metadata: Metadata = { title: "Scheduling" };
  * Scheduling — a calendar-style month view of planned maintenance alongside an
  * upcoming timeline, with A-Check / C-Check / engine-inspection counts.
  */
-export default function SchedulingPage() {
+export default async function SchedulingPage() {
+  const [events, upcoming, schedulingStats] = await Promise.all([
+    getMaintenanceEvents(),
+    getUpcomingMaintenance(),
+    getSchedulingStats(),
+  ]);
+
   return (
     <div className="container-content py-6 sm:py-8">
       <PageHeader
@@ -36,10 +46,10 @@ export default function SchedulingPage() {
 
       <section className="mt-6 grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <MaintenanceCalendar />
+          <MaintenanceCalendar events={events} />
         </div>
         <div>
-          <UpcomingTimeline />
+          <UpcomingTimeline events={upcoming} />
         </div>
       </section>
     </div>

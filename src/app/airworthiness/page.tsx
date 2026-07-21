@@ -5,7 +5,11 @@ import { Tabs } from "@/components/ui/tabs";
 import { ADTable } from "@/components/airworthiness/ad-table";
 import { SBTable } from "@/components/airworthiness/sb-table";
 import { AlertTriangleIcon, CheckCircleIcon, DocumentIcon, ShieldCheckIcon } from "@/components/icons";
-import { airworthinessStats, directives, bulletins } from "@/lib/airworthiness";
+import {
+  getAirworthinessDirectives,
+  getServiceBulletins,
+  getAirworthinessStats,
+} from "@/lib/data/airworthiness";
 
 export const metadata: Metadata = { title: "Airworthiness" };
 
@@ -13,7 +17,13 @@ export const metadata: Metadata = { title: "Airworthiness" };
  * Airworthiness — Airworthiness Directives & Service Bulletins, split into
  * tabs, each with its own search and filters. Summary counts sit above.
  */
-export default function AirworthinessPage() {
+export default async function AirworthinessPage() {
+  const [directives, bulletins, airworthinessStats] = await Promise.all([
+    getAirworthinessDirectives(),
+    getServiceBulletins(),
+    getAirworthinessStats(),
+  ]);
+
   return (
     <div className="container-content py-6 sm:py-8">
       <PageHeader
@@ -35,13 +45,13 @@ export default function AirworthinessPage() {
               id: "ad",
               label: "Airworthiness Directives",
               count: directives.length,
-              content: <ADTable />,
+              content: <ADTable directives={directives} />,
             },
             {
               id: "sb",
               label: "Service Bulletins",
               count: bulletins.length,
-              content: <SBTable />,
+              content: <SBTable bulletins={bulletins} />,
             },
           ]}
         />

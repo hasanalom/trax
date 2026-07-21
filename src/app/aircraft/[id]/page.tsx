@@ -11,16 +11,13 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { Table, Thead, Th, Tr, Td, RowLink } from "@/components/ui/table";
 import { DocumentIcon, DownloadIcon } from "@/components/icons";
 import { formatDate, formatNumber, daysUntil, dueLabel } from "@/lib/format";
-import {
-  aircraft,
-  getAircraft,
-  fleetStatusTone,
-  airworthinessTone,
-} from "@/lib/fleet";
-import { recordsForAircraft, docStatusTone } from "@/lib/records";
+import { fleetStatusTone, airworthinessTone } from "@/lib/fleet";
+import { getAircraft, getAircraftById } from "@/lib/data/fleet";
+import { getTechnicalRecordsForAircraft } from "@/lib/data/records";
+import { docStatusTone } from "@/lib/records";
 
-export function generateStaticParams() {
-  return aircraft.map((a) => ({ id: a.id }));
+export async function generateStaticParams() {
+  return (await getAircraft()).map((a) => ({ id: a.id }));
 }
 
 export async function generateMetadata({
@@ -29,7 +26,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const a = getAircraft(id);
+  const a = await getAircraftById(id);
   return { title: a ? `${a.registration} · ${a.type}` : "Aircraft" };
 }
 
@@ -39,10 +36,10 @@ export default async function AircraftDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const a = getAircraft(id);
+  const a = await getAircraftById(id);
   if (!a) notFound();
 
-  const records = recordsForAircraft(a.id);
+  const records = await getTechnicalRecordsForAircraft(a.id);
   const avgFhPerCycle = (a.flightHours / a.flightCycles).toFixed(2);
 
   // Progress through the current check interval (last → next check).

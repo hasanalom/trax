@@ -3,14 +3,18 @@ import { Badge } from "@/components/ui/badge";
 import { EmptyState } from "@/components/ui/empty-state";
 import { CalendarIcon } from "@/components/icons";
 import { formatDate, dueLabel } from "@/lib/format";
-import { upcoming, typeColorVar, eventStatusTone } from "@/lib/scheduling";
+import {
+  typeColorVar,
+  eventStatusTone,
+  type MaintenanceEvent,
+} from "@/lib/scheduling";
 
 /**
  * UpcomingTimeline — the next maintenance events as a compact vertical list,
  * soonest first. Each row carries a type-coloured rail, aircraft, hangar and
  * status.
  */
-export function UpcomingTimeline() {
+export function UpcomingTimeline({ events: upcoming }: { events: MaintenanceEvent[] }) {
   return (
     <Card className="h-full">
       <CardHeader title="Upcoming Maintenance" hint="Next scheduled events" />
