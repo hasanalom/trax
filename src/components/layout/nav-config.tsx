@@ -12,6 +12,7 @@ import {
   DocumentIcon,
   GridIcon,
   LayersIcon,
+  SparklesIcon,
   type IconProps,
 } from "@/components/icons";
 
@@ -29,7 +30,10 @@ export interface NavSection {
 
 export const navSections: NavSection[] = [
   {
-    items: [{ label: "Overview", href: "/", icon: GridIcon }],
+    items: [
+      { label: "Overview", href: "/", icon: GridIcon },
+      { label: "Assistant", href: "/assistant", icon: SparklesIcon },
+    ],
   },
   {
     title: "Fleet",

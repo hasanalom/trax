@@ -286,3 +286,24 @@ export const UserIcon = (p: IconProps) => (
     <path d="M5.5 19.5a6.5 6.5 0 0 1 13 0" />
   </IconBase>
 );
+
+export const SparklesIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M12 4.5c.6 3 1.5 3.9 4.5 4.5-3 .6-3.9 1.5-4.5 4.5-.6-3-1.5-3.9-4.5-4.5 3-.6 3.9-1.5 4.5-4.5Z" />
+    <path d="M18 14c.3 1.4.7 1.8 2 2-1.3.3-1.7.7-2 2-.3-1.3-.7-1.7-2-2 1.3-.2 1.7-.6 2-2Z" />
+  </IconBase>
+);
+
+export const SendIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M5 12 20 5l-4.5 15-3.5-6.5L5 12Z" />
+    <path d="m12 13 3.5-3.5" />
+  </IconBase>
+);
+
+export const RefreshIcon = (p: IconProps) => (
+  <IconBase {...p}>
+    <path d="M19 8a7 7 0 1 0 1.5 5" />
+    <path d="M20 4v4h-4" />
+  </IconBase>
+);
