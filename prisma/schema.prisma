@@ -1,0 +1,130 @@
+// TRAX · Phase 3 — Backend & Database
+// Read-only demo. SQLite for portability. Date columns use DateTime (converted
+// to display strings in the repository layer). IDs are the existing stable
+// slugs so routes (/aircraft/[id], /records/[id]) never change.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+/// People: engineers, authors and reviewers. Ready for auth to attach later.
+model User {
+  id      String @id
+  name    String @unique
+  title   String
+  license String?
+  role    String
+
+  aircraft        Aircraft[]        @relation("AssignedEngineer")
+  authoredRecords TechnicalRecord[] @relation("RecordAuthor")
+  reviewedRecords TechnicalRecord[] @relation("RecordReviewer")
+  findings        ComplianceFinding[]
+}
+
+model Aircraft {
+  id            String   @id
+  registration  String   @unique
+  type          String
+  manufacturer  String
+  model         String
+  msn           String
+  engine        String
+  seats         Int
+  yearBuilt     Int
+  baseCode      String
+  baseCity      String
+  status        String
+  airworthiness String
+  flightHours   Int
+  flightCycles  Int
+  lastCheckType String
+  lastCheckDate DateTime
+  nextCheckType String
+  nextCheckDate DateTime
+
+  engineerId String
+  engineer   User   @relation("AssignedEngineer", fields: [engineerId], references: [id])
+
+  records TechnicalRecord[]
+}
+
+model TechnicalRecord {
+  id          String   @id
+  title       String
+  reference   String
+  category    String
+  ataChapter  String
+  aircraftText String  // display string ("N320TX" / "Fleet-wide")
+  revision    String
+  status      String
+  updated     String   // relative display label ("12 min ago")
+  updatedDate DateTime
+
+  aircraftId String?
+  aircraft   Aircraft? @relation(fields: [aircraftId], references: [id])
+
+  authorId   String
+  author     User      @relation("RecordAuthor", fields: [authorId], references: [id])
+  reviewerId String
+  reviewer   User      @relation("RecordReviewer", fields: [reviewerId], references: [id])
+
+  // Sub-documents kept as JSON (no dedicated models — Option A scope).
+  signoff     Json
+  attachments Json
+  history     Json
+  notes       Json
+}
+
+model AirworthinessDirective {
+  ref           String   @id
+  subject       String
+  ataChapter    String
+  applicability String
+  effectiveDate DateTime
+  dueDate       DateTime
+  priority      String
+  status        String
+  recordId      String?
+}
+
+model ServiceBulletin {
+  ref           String   @id
+  subject       String
+  ataChapter    String
+  applicability String
+  issueDate     DateTime
+  category      String
+  status        String
+  recordId      String?
+}
+
+model ComplianceFinding {
+  id         String   @id
+  title      String
+  aircraft   String // registration display string
+  ataChapter String
+  severity   String
+  source     String
+  raisedDate DateTime
+  dueDate    DateTime
+  status     String
+
+  ownerId String
+  owner   User   @relation(fields: [ownerId], references: [id])
+}
+
+model MaintenanceEvent {
+  id           String   @id
+  aircraft     String // registration display string
+  type         String
+  date         DateTime
+  durationDays Int
+  status       String
+  hangar       String
+  description  String
+}
