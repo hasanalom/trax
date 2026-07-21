@@ -135,7 +135,14 @@ export function AssistantChat({ mode }: { mode: ProviderName }) {
 
       {/* Chat */}
       <Card className="flex min-h-0 flex-col">
-        <div ref={scrollRef} className="flex-1 overflow-y-auto p-5">
+        <div
+          ref={scrollRef}
+          role="log"
+          aria-live="polite"
+          aria-busy={loading}
+          aria-label="Conversation"
+          className="flex-1 overflow-y-auto p-5"
+        >
           {active.messages.length === 0 ? (
             <div className="flex h-full items-center py-6">
               <SuggestedPrompts onSelect={send} />
@@ -181,7 +188,8 @@ export function AssistantChat({ mode }: { mode: ProviderName }) {
               }}
               rows={1}
               placeholder="Ask about the fleet, an AD, a record, findings…"
-              className="max-h-32 min-h-9 flex-1 resize-none rounded-md border border-border-default bg-surface-raised px-3 py-2 text-body text-primary outline-none transition-standard placeholder:text-tertiary focus:border-border-focus"
+              aria-label="Message the assistant"
+              className="max-h-32 min-h-9 flex-1 resize-none rounded-md border border-border-default bg-surface-raised px-3 py-2 text-body text-primary outline-none transition-standard placeholder:text-tertiary focus:border-border-focus focus-visible:ring-2 focus-visible:ring-accent/40"
             />
             <Button type="submit" variant="primary" size="md" iconOnly aria-label="Send message" disabled={loading || !input.trim()}>
               <SendIcon size={16} />

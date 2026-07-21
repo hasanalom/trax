@@ -52,8 +52,12 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             drawerOpen ? "opacity-100" : "opacity-0",
           )}
           onClick={() => setDrawerOpen(false)}
+          aria-hidden="true"
         />
         <aside
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
           className={cn(
             "absolute inset-y-0 left-0 border-r border-border-subtle shadow-xl transition-transform duration-200 ease-standard",
             drawerOpen ? "translate-x-0" : "-translate-x-full",

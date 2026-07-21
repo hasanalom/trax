@@ -49,6 +49,7 @@ export function Th({
 }) {
   return (
     <th
+      scope="col"
       className={cn(
         "px-5 py-2.5 font-medium",
         align === "right" && "text-right",
