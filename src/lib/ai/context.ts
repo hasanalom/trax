@@ -113,7 +113,7 @@ export async function retrieveDirective(ref: string): Promise<Retrieved | null> 
 
   const lines = [
     `${ad.ref} — ${ad.subject}.`,
-    `ATA ${ad.ataChapter}. Applicability: ${ad.applicability}. Priority: ${ad.priority}.`,
+    `${ad.ataChapter}. Applicability: ${ad.applicability}. Priority: ${ad.priority}.`,
     `Compliance status: ${ad.status}. Effective ${iso(ad.effectiveDate)}; due ${iso(ad.dueDate)}.`,
   ];
   const sources: Source[] = [{ kind: "ad", label: ad.ref }];
@@ -135,7 +135,7 @@ async function retrieveBulletin(ref: string): Promise<Retrieved | null> {
   if (!sb) return null;
   const lines = [
     `${sb.ref} — ${sb.subject}.`,
-    `ATA ${sb.ataChapter}. Applicability: ${sb.applicability}. Category: ${sb.category}. Status: ${sb.status}. Issued ${iso(sb.issueDate)}.`,
+    `${sb.ataChapter}. Applicability: ${sb.applicability}. Category: ${sb.category}. Status: ${sb.status}. Issued ${iso(sb.issueDate)}.`,
   ];
   return { briefing: lines.join("\n"), sources: [{ kind: "sb", label: sb.ref }] };
 }
