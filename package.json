@@ -19,6 +19,7 @@
   "dependencies": {
     "@prisma/client": "^6.19.3",
     "next": "16.2.10",
+    "openai": "^6.48.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "server-only": "^0.0.1"
@@ -39,6 +40,7 @@
     "esbuild@0.28.1": true,
     "@prisma/client@6.19.3": true,
     "@prisma/engines@6.19.3": true,
-    "prisma@6.19.3": true
+    "prisma@6.19.3": true,
+    "openai@6.48.0": true
   }
 }
