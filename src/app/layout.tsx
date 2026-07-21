@@ -19,12 +19,37 @@ const mono = Geist_Mono({
   display: "swap",
 });
 
+const APP_DESCRIPTION =
+  "Aviation Technical Records dashboard — fleet, airworthiness directives, compliance findings, maintenance scheduling and an AI records assistant.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://trax.local"),
+  applicationName: "TRAX",
   title: {
     default: "TRAX · Technical Records",
     template: "%s · TRAX",
   },
-  description: "Aviation technical records — airworthiness, compliance and fleet scheduling.",
+  description: APP_DESCRIPTION,
+  keywords: [
+    "aviation",
+    "technical records",
+    "airworthiness",
+    "maintenance",
+    "compliance",
+    "fleet management",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: "TRAX",
+    title: "TRAX · Technical Records",
+    description: APP_DESCRIPTION,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary",
+    title: "TRAX · Technical Records",
+    description: APP_DESCRIPTION,
+  },
 };
 
 export const viewport: Viewport = {

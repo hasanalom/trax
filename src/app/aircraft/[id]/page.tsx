@@ -27,7 +27,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const a = await getAircraftById(id);
-  return { title: a ? `${a.registration} · ${a.type}` : "Aircraft" };
+  if (!a) return { title: "Aircraft" };
+  return {
+    title: `${a.registration} · ${a.type}`,
+    description: `${a.registration} — ${a.manufacturer} ${a.model} status, hours, cycles, maintenance and technical records.`,
+  };
 }
 
 export default async function AircraftDetailPage({

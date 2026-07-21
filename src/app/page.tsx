@@ -15,6 +15,13 @@ import {
 } from "@/components/icons";
 import { kpis } from "@/lib/demo-data";
 import type { ComponentType } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Overview",
+  description:
+    "Fleet-wide technical records status: KPIs, fleet status, due items, recent documents and activity.",
+};
 
 /**
  * Phase 1 — Enterprise Dashboard (Overview).

@@ -11,7 +11,11 @@ import {
   getAirworthinessStats,
 } from "@/lib/data/airworthiness";
 
-export const metadata: Metadata = { title: "Airworthiness" };
+export const metadata: Metadata = {
+  title: "Airworthiness",
+  description:
+    "Airworthiness Directives and Service Bulletins with compliance state, priority and due dates.",
+};
 
 /**
  * Airworthiness — Airworthiness Directives & Service Bulletins, split into

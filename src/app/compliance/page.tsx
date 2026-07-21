@@ -9,7 +9,11 @@ import { AlertTriangleIcon, CheckCircleIcon, ClipboardIcon, ShieldCheckIcon } fr
 import { reviewQueue } from "@/lib/compliance";
 import { getFindings, getComplianceStats } from "@/lib/data/compliance";
 
-export const metadata: Metadata = { title: "Compliance" };
+export const metadata: Metadata = {
+  title: "Compliance",
+  description:
+    "Compliance findings, review queue and audit history across the fleet.",
+};
 
 /**
  * Compliance — findings management across open, closed, review-queue and audit

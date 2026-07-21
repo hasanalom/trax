@@ -4,7 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { AssistantChat } from "@/components/assistant/assistant-chat";
 import { getProviderName } from "@/lib/ai";
 
-export const metadata: Metadata = { title: "Assistant" };
+export const metadata: Metadata = {
+  title: "Assistant",
+  description:
+    "AI Technical Records Assistant grounded in TRAX fleet, airworthiness, compliance and scheduling data.",
+};
 
 /**
  * AI Assistant — a Copilot-style technical-records assistant grounded in the

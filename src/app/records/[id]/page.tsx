@@ -32,7 +32,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   const r = await getTechnicalRecord(id);
-  return { title: r ? r.title : "Record" };
+  if (!r) return { title: "Record" };
+  return {
+    title: r.title,
+    description: `${r.reference} — ${r.category} for ${r.aircraft} (${r.ataChapter}), status ${r.status}.`,
+  };
 }
 
 export default async function RecordDetailPage({

@@ -11,7 +11,11 @@ import {
 } from "@/components/icons";
 import { getAircraft, getFleetStats } from "@/lib/data/fleet";
 
-export const metadata: Metadata = { title: "Aircraft Fleet" };
+export const metadata: Metadata = {
+  title: "Aircraft Fleet",
+  description:
+    "Fleet register with status, airworthiness, flight hours, cycles and base for every aircraft.",
+};
 
 /**
  * Aircraft Fleet — the fleet register: summary counts + a searchable table.

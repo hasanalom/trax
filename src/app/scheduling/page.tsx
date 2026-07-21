@@ -11,7 +11,11 @@ import {
   getSchedulingStats,
 } from "@/lib/data/scheduling";
 
-export const metadata: Metadata = { title: "Scheduling" };
+export const metadata: Metadata = {
+  title: "Scheduling",
+  description:
+    "Planned maintenance calendar and upcoming A-checks, C-checks and engine inspections.",
+};
 
 /**
  * Scheduling — a calendar-style month view of planned maintenance alongside an
