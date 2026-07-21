@@ -153,7 +153,7 @@ async function retrieveFinding(id: string): Promise<Retrieved | null> {
 
 /* ---- intent retrievers -------------------------------------------------- */
 
-export async function retrieveOpenFindings(): Promise<Retrieved> {
+async function retrieveOpenFindings(): Promise<Retrieved> {
   const open = (await getFindings()).filter((f) => f.status !== "Closed");
   if (!open.length) return { briefing: "There are no open compliance findings.", sources: [] };
   const briefing = [
@@ -165,7 +165,7 @@ export async function retrieveOpenFindings(): Promise<Retrieved> {
   return { briefing, sources: open.map((f) => ({ kind: "finding", label: `Finding ${f.id}` })) };
 }
 
-export async function retrieveUpcoming(): Promise<Retrieved> {
+async function retrieveUpcoming(): Promise<Retrieved> {
   const up = await getUpcomingMaintenance();
   if (!up.length) return { briefing: "No upcoming maintenance is scheduled.", sources: [] };
   const briefing = [
