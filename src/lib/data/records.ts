@@ -53,6 +53,12 @@ export async function getTechnicalRecordIds(): Promise<string[]> {
   return rows.map((r) => r.id);
 }
 
+/** All records (used by the AI context layer to resolve references). */
+export async function getTechnicalRecords(): Promise<TechRecord[]> {
+  const rs = await prisma.technicalRecord.findMany({ include });
+  return rs.map(toRecord);
+}
+
 /** Records attached to a given aircraft (for the aircraft detail page). */
 export async function getTechnicalRecordsForAircraft(
   aircraftId: string,
